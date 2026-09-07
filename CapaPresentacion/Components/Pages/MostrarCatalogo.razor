@@ -1,0 +1,30 @@
+﻿@using CapaLogica
+@inject ServicioCatalogo ServUser
+@page "/MostrarCatalogo"
+@rendermode InteractiveServer
+<center><h3>MostrarCatalogo</h3></center>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Editorial</th>
+            <th>Género</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var libro in ServUser.ObtenerLibros())
+        {
+            <tr>
+                <td>@libro.Titulo</td>
+                <td>@libro.Autor</td>
+                <td>@libro.Editorial</td>
+                <td>@libro.Genero</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    // Servicio inyectado como singleton en el contenedor
+}

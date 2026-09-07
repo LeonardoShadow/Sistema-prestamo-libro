@@ -1,11 +1,45 @@
 ﻿@using Microsoft.AspNetCore.Components.Forms
+@using CapaLogica
+@inject ServicioCatalogo ServLibro
+@rendermode InteractiveServer
 @page "/LibroCatalogoDistribuidor"
 <center><h3>Agregacion del libro</h3></center>
 
-<EditForm Model="">
-
+<EditForm Model="ModeloLibro" FormName="FormularioCatalogo" OnValidSubmit="Procesar">
+	<DataAnnotationsValidator></DataAnnotationsValidator>
+	<div>
+		<div>
+			<label class="form-label">Nombre del libro</label>
+			<InputText @bind-Value="ModeloLibro.Titulo" class="form-control"></InputText>
+			<ValidationMessage For="@(() => ModeloLibro.Titulo)"/>
+		</div><br />
+		<div>
+			<label class="form-label">Autor</label>
+			<InputText @bind-Value="ModeloLibro.Autor" class="form-control"></InputText>
+			<ValidationMessage For="@(() => ModeloLibro.Autor)"/>
+		</div><br />
+		<div>
+			<label class="form-label">Editorial</label>
+			<InputText @bind-Value="ModeloLibro.Editorial" class="form-control"></InputText>
+			<ValidationMessage For="@(() => ModeloLibro.Editorial)" />
+		</div><br />
+		<div>
+			<label class="form-label">Genero</label>
+			<InputText @bind-Value="ModeloLibro.Genero" class="form-control"></InputText>
+			<ValidationMessage For="@(() => ModeloLibro.Genero)" />
+		</div><br />
+	</div><br /><br />
+	<div>
+		<button class="btn btn-primary" type="submit">Guardar</button>
+		<button class="btn btn-secondary" type="reset">Limpiar</button>
+	</div>
 </EditForm>
 
 @code {
+	public Libro ModeloLibro = new Libro();
 
+	public void Procesar()
+	{
+		ServLibro.AgregarLibro(ModeloLibro);
+	}
 }
